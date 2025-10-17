@@ -1,6 +1,6 @@
 import type { Context } from "@netlify/functions";
 
-const base_url = "";
+const base_url = "https://api.openelectricity.org.au/v4";
 
 const state_overview = async (req: Request, context: Context) => {
   // set up response headers
@@ -17,11 +17,16 @@ const state_overview = async (req: Request, context: Context) => {
   } = { message: "", error: false };
   let response_status = 200;
 
-  const token = req.headers.get("Authorization")?.split(" ")[1];
+  const token = req.headers.get("Authorization");
 
   if (token) {
     const open_data = await fetch(
-      `${base_url}/data/facilities/NEM?metrics=power&interval=1d&facility_code=CALL_B&date_start=2025-10-15T00:00:00`
+      `${base_url}/data/facilities/NEM?metrics=power&interval=1d&facility_code=CALL_B&date_start=2025-10-15T00:00:00`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
     ).then((data) => data.json());
 
     response_json.data = open_data;
