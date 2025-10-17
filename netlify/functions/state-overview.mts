@@ -33,7 +33,7 @@ const state_overview = async (req: Request, context: Context) => {
     ).then((data) => data.json());
 
     response_json.data = open_data;
-    response_json.message = "We got data!";
+    response_json.message = "Open Electricity data retrieved.";
   } else {
     // no token provided, return error
     response_status = 401;
