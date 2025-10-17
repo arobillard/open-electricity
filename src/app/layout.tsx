@@ -25,9 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
-        {children}
+        <header>
+          <div className="container mx-auto px-6 py-6">
+            <h1 className="text-4xl">Open Electricity - Supergood</h1>
+          </div>
+        </header>
+        <main>{children}</main>
       </body>
     </html>
   );

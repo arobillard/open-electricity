@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true
+}
