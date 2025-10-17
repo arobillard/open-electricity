@@ -7,6 +7,8 @@ const state_overview = async (req: Request, context: Context) => {
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
+  const search_params = new URL(req.url).searchParams;
+
   // data to be returned
   const response_json: {
     error?: boolean;
@@ -17,14 +19,15 @@ const state_overview = async (req: Request, context: Context) => {
   } = { message: "", error: false };
   let response_status = 200;
 
-  const token = req.headers.get("Authorization");
+  // const token = req.headers.get("Authorization");
+  const token = search_params.get("api_key");
 
   if (token) {
     const open_data = await fetch(
       `${base_url}/data/facilities/NEM?metrics=power&interval=1d&facility_code=CALL_B&date_start=2025-10-15T00:00:00`,
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       }
     ).then((data) => data.json());
